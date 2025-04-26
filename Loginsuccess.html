@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login Success | Power Study</title>
+  
+  <script src="/cookie-validator.js"></script>
+  <script>
+    document.cookie = "power_success=success; path=/; Secure; expires=" + new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString();
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    const hasValidCookie = getCookie('server01KeyGenerated') ||
+      getCookie('server02KeyGenerated') ||
+      getCookie('server03KeyGenerated') ||
+      getCookie('recommendServerKeyGenerated');
+
+    if (!hasValidCookie) {
+      window.location.href = '/login/';
+    } else {
+      setTimeout(() => {
+        window.location.href = 'Batches.html';
+      }, 3000);
+    }
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      color: #fff;
+    }
+
+    /* Bubbles Background */
+    .bubbles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(255, 215, 0, 0.15);
+      border-radius: 50%;
+      animation: rise 20s infinite ease-in;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-1200px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 50px 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      max-width: 500px;
+      animation: fadeIn 1.5s ease-out;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .container:hover {
+      transform: scale(1.04);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    h2 {
+      font-size: 36px;
+      background: linear-gradient(45deg, #FFD700, #FF8C00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(255, 140, 0, 0.8);
+    }
+
+    p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .loading {
+      font-size: 20px;
+      color: #FFD700;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading span {
+      display: inline-block;
+      margin: 0 2px;
+      animation: bounce 1.2s infinite;
+    }
+
+    .loading span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loading span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bubbles">
+    <!-- Bubbles floating up -->
+    <div class="bubble" style="left: 10%; width: 20px; height: 20px; animation-duration: 15s;"></div>
+    <div class="bubble" style="left: 25%; width: 30px; height: 30px; animation-duration: 18s;"></div>
+    <div class="bubble" style="left: 40%; width: 18px; height: 18px; animation-duration: 14s;"></div>
+    <div class="bubble" style="left: 55%; width: 26px; height: 26px; animation-duration: 20s;"></div>
+    <div class="bubble" style="left: 70%; width: 22px; height: 22px; animation-duration: 17s;"></div>
+    <div class="bubble" style="left: 85%; width: 28px; height: 28px; animation-duration: 19s;"></div>
+  </div>
+
+  <div class="container">
+    <h2>Success!</h2>
+    <p>Congratulations! Your login was successful.<br>You are now logged in for the next 6 hours.<br><strong>Study wisely with Power Study!</strong></p>
+    <div class="loading">
+      <span>.</span><span>.</span><span>.</span>
+    </div>
+  </div>
+
+</body>
+</html>
