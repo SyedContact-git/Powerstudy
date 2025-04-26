@@ -7,7 +7,7 @@
   
   <script src="/cookie-validator.js"></script>
   <script>
-    document.cookie = "power_success=success; path=/; Secure; expires=" + new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString();
+    document.cookie = "power_success=success; path=/; Secure; expires=" + new Date(new Date().getTime() + 6 * 60 * 60 * 1000).toUTCString();
 
     function getCookie(name) {
       const value = `; ${document.cookie}`;
@@ -21,10 +21,10 @@
       getCookie('recommendServerKeyGenerated');
 
     if (!hasValidCookie) {
-      window.location.href = '/login/';
+      window.location.href = 'Generatekey.html';
     } else {
       setTimeout(() => {
-        window.location.href = 'Batches.html';
+        window.location.href = 'Player.html';
       }, 3000);
     }
   </script>
