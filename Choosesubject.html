@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PowerStudy - Learn</title>
+<script>
+   function getCookie(name) {
+   const value = `; ${document.cookie}`;
+   const parts = value.split(`; ${name}=`);
+   if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+   if (!getCookie('рџ”Ґ')) {
+               
+     window.location.href = 'Generatekey.html';
+     }
+     </script>
+  <style>
+  
+    /* GLOBAL STYLES */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #f8f0ff, #efe0ff);
+      color: #4b0082;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Snowfall background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://cdn.jsdelivr.net/gh/Julienh/ShinySnow/snow.png') repeat;
+      animation: snow 50s linear infinite;
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    @keyframes snow {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 1000px; }
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 10px 20px;
+      font-size: 36px;
+      font-weight: 900;
+      color: #6a0dad;
+      text-shadow: 0 0 12px #d8b4fe;
+      background: #f0e6ff;
+      border-bottom: 1px solid #d8b4fe;
+      box-shadow: 0 4px 8px #d8b4fe88;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin: 25px 0 10px;
+    }
+
+    .search-bar input {
+      padding: 12px 30px;
+      border-radius: 30px;
+      width: 320px;
+      border: 2px solid #c084fc;
+      background: #faf5ff;
+      color: #4b0082;
+      font-size: 16px;
+      outline: none;
+      box-shadow: 0 0 15px #e0cfff;
+      transition: 0.3s ease;
+    }
+
+    .search-bar input::placeholder {
+      color: #9c4dcc;
+    }
+
+    .search-bar input:focus {
+      background: #f0e0ff;
+      box-shadow: 0 0 25px #c084fc;
+      border-color: #a855f7;
+    }
+
+    /* TOGGLE BUTTONS */
+    .toggle-buttons {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .toggle-buttons button {
+      padding: 12px 30px;
+      margin: 0 10px;
+      border-radius: 30px;
+      border: 2px solid #c084fc;
+      background: transparent;
+      color: #6a0dad;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 10px #e9d5ff;
+    }
+
+    .toggle-buttons button:hover,
+    .toggle-buttons button.active {
+      background: #c084fc;
+      color: #fff;
+      box-shadow: 0 0 20px #c084fc88;
+      transform: scale(1.05);
+    }
+
+    /* DROPDOWN */
+    select {
+      display: block;
+      margin: 10px auto 30px;
+      padding: 10px 20px;
+      border-radius: 25px;
+      background: #f8f0ff;
+      color: #6a0dad;
+      border: 2px solid #c084fc;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 0 10px #e0cfff;
+    }
+
+    /* CARDS */
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 10px 20px 50px;
+    }
+
+    .card {
+      background: #f9f3ff;
+      border: 1px solid #d8b4fe;
+      border-radius: 25px;
+      width: 320px;
+      overflow: hidden;
+      box-shadow: 0 0 20px #d8b4fe77;
+      transition: 0.4s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 0 30px #c084fcaa;
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-bottom: 1px solid #d8b4fe;
+    }
+
+    .card h3 {
+      padding: 15px 10px 5px;
+      font-size: 18px;
+      color: #4b0082;
+      text-align: center;
+    }
+
+    .card .btn {
+      display: block;
+      margin: 15px auto 20px;
+      padding: 10px 20px;
+      background: #c084fc;
+      color: #fff;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      width: fit-content;
+      transition: 0.3s ease;
+      box-shadow: 0 0 15px #e0cfff;
+    }
+
+    .card .btn:hover {
+      background: #a855f7;
+      box-shadow: 0 0 20px #c084fcaa;
+    }
+
+    /* HIDDEN SECTIONS */
+    .hidden {
+      display: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      header {
+        font-size: 26px;
+      }
+
+      .toggle-buttons button {
+        margin: 10px 6px;
+        padding: 10px 20px;
+      }
+
+      .search-bar input {
+        width: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>PowerStudy - Aarambh</header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search Lectures or Notes...">
+  </div>
+
+  <div class="toggle-buttons">
+    <button id="lecturesBtn" class="active">Lectures</button>
+    <button id="notesBtn">Notes</button>
+  </div>
+
+  <select id="subjectFilter">
+    <option value="all">All Subjects</option>
+    <option value="science">Science</option>
+    <option value="maths">Maths</option>
+    <option value="english">English</option>
+    <option value="social science">Social Science</option>
+  </select>
+
+  <!-- LECTURES SECTION -->
+  <div id="lecturesSection" class="card-container">
+    <div class="card" data-subject="science" data-title="science lecture 1">
+      <img src="https://placehold.co/300x160/c084fc/000?text=Science" alt="Science">
+      <h3>Science Lecture 1</h3>
+      <a href="#" class="btn">Watch</a>
+    </div>
+    <div class="card" data-subject="maths" data-title="maths algebra basics">
+      <img src="https://placehold.co/300x160/a855f7/000?text=Maths" alt="Maths">
+      <h3>Maths Algebra Basics</h3>
+      <a href="#" class="btn">Watch</a>
+    </div>
+    <div class="card" data-subject="english" data-title="english grammar 101">
+      <img src="https://placehold.co/300x160/9333ea/fff?text=English" alt="English">
+      <h3>English Grammar 101</h3>
+      <a href="#" class="btn">Watch</a>
+    </div>
+  </div>
+
+  <!-- NOTES SECTION -->
+  <div id="notesSection" class="card-container hidden">
+    <div class="card" data-subject="science" data-title="science notes chapter 1">
+      <img src="https://placehold.co/300x160/ede9fe/000?text=Notes" alt="Notes">
+      <h3>Science Notes - Chapter 1</h3>
+      <a href="#" class="btn">Download</a>
+    </div>
+  </div>
+
+  <script>
+    const lecturesBtn = document.getElementById('lecturesBtn');
+    const notesBtn = document.getElementById('notesBtn');
+    const lecturesSection = document.getElementById('lecturesSection');
+    const notesSection = document.getElementById('notesSection');
+    const filter = document.getElementById('subjectFilter');
+    const searchInput = document.getElementById('searchInput');
+
+    lecturesBtn.onclick = () => {
+      lecturesBtn.classList.add('active');
+      notesBtn.classList.remove('active');
+      lecturesSection.classList.remove('hidden');
+      notesSection.classList.add('hidden');
+      searchInput.value = "";
+      filterCards();
+    };
+
+    notesBtn.onclick = () => {
+      notesBtn.classList.add('active');
+      lecturesBtn.classList.remove('active');
+      notesSection.classList.remove('hidden');
+      lecturesSection.classList.add('hidden');
+      searchInput.value = "";
+      filterCards();
+    };
+
+    filter.addEventListener('change', filterCards);
+    searchInput.addEventListener('keyup', filterCards);
+
+    function filterCards() {
+      const selected = filter.value.toLowerCase();
+      const searchText = searchInput.value.toLowerCase();
+      const activeSection = !lecturesSection.classList.contains('hidden') ? lecturesSection : notesSection;
+      const cards = activeSection.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        const subject = card.dataset.subject.toLowerCase();
+        const title = card.dataset.title.toLowerCase();
+        const matchSubject = selected === 'all' || subject === selected;
+        const matchText = title.includes(searchText);
+        card.style.display = matchSubject && matchText ? 'block' : 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>
