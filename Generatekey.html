@@ -1,167 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Power Study - Generate Key</title>
+  <title>Power Study Access</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: #f5f0ff;
+      background: linear-gradient(135deg, #f3e8ff, #e0c3fc);
+      color: #4b0082;
       overflow: hidden;
       position: relative;
-      color: #4b0082;
     }
 
-    /* Bubbles Background */
-    .bubbles {
+    .snowflake {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -1;
+      top: -10px;
+      color: white;
+      font-size: 1.2em;
+      user-select: none;
+      pointer-events: none;
+      animation: fall linear infinite;
     }
 
-    .bubble {
-      position: absolute;
-      bottom: -100px;
-      background: rgba(155, 89, 182, 0.2);
-      border-radius: 50%;
-      animation: rise 20s infinite ease-in;
-    }
-
-    @keyframes rise {
+    @keyframes fall {
       0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
+        transform: translateY(0) translateX(0);
       }
       100% {
-        transform: translateY(-1200px) scale(1.5);
-        opacity: 0;
+        transform: translateY(100vh) translateX(20px);
       }
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.3);
+      z-index: 1;
+      backdrop-filter: blur(3px);
     }
 
     .container {
+      position: relative;
+      z-index: 2;
       background: rgba(255, 255, 255, 0.8);
-      border-radius: 20px;
-      padding: 30px;
-      width: 400px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
-      border: 1px solid rgba(155, 89, 182, 0.3);
       backdrop-filter: blur(10px);
-      z-index: 1;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(155, 89, 182, 0.6);
+      text-align: center;
+      animation: fadeIn 1s ease;
+      max-width: 400px;
+      border: 2px solid #dcd6f7;
     }
 
     h2 {
-      font-size: 26px;
       color: #6a0dad;
-      text-shadow: 0 0 8px rgba(155, 89, 182, 0.6);
+      font-size: 28px;
+      margin-bottom: 15px;
+      animation: slideIn 0.5s ease;
+      text-shadow: 1px 1px 5px rgba(102, 51, 153, 0.6);
     }
 
     p {
-      font-size: 14px;
+      color: #5e4b8b;
       margin-bottom: 20px;
-      color: #5c2d91;
+      font-size: 18px;
+      animation: fadeIn 0.8s ease;
+      line-height: 1.6;
+    }
+
+    .button, .video-button, .recommend-button {
+      font-weight: 600;
+      border: none;
+      padding: 12px 25px;
+      font-size: 18px;
+      border-radius: 10px;
+      margin: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .button {
-      display: inline-block;
-      width: 100%;
-      padding: 12px;
-      font-size: 15px;
-      color: #fff;
-      border: 1px solid #8e2de2;
-      background: linear-gradient(135deg, #8e2de2, #4a00e0);
-      border-radius: 8px;
-      cursor: pointer;
-      margin: 8px 0;
-      font-weight: 600;
-      transition: 0.3s;
-      text-transform: uppercase;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(142, 45, 226, 0.5);
+      background: linear-gradient(90deg, #a18cd1, #fbc2eb);
+      color: #4b0082;
+      box-shadow: 0 5px 15px rgba(171, 71, 188, 0.5);
     }
 
     .button:hover {
-      background: linear-gradient(135deg, #4a00e0, #8e2de2);
-      color: #ffffff;
-      box-shadow: 0 0 15px rgba(142, 45, 226, 0.7);
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(171, 71, 188, 0.7);
+    }
+
+    .video-button {
+      background: linear-gradient(90deg, #89f7fe, #66a6ff);
+      color: #fff;
+      box-shadow: 0 5px 15px rgba(102, 166, 255, 0.6);
+    }
+
+    .video-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(102, 166, 255, 0.8);
+    }
+
+    .recommend-button {
+      background: linear-gradient(90deg, #fddb92, #d1fdff);
+      color: #4b0082;
+      animation: pulse 2s infinite;
+      box-shadow: 0 5px 15px rgba(255, 223, 186, 0.6);
+    }
+
+    .recommend-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(255, 223, 186, 0.8);
     }
 
     .loading {
-      font-size: 13px;
-      color: #8e2de2;
-      margin-top: 10px;
+      margin-top: 20px;
+      font-size: 16px;
+      color: #4b0082;
       display: none;
-      animation: flicker 1.5s infinite alternate;
+      animation: fadeIn 0.5s ease;
     }
 
-    @keyframes flicker {
-      from { opacity: 0.6; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
       to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+      h2 {
+        font-size: 24px;
+      }
+      p {
+        font-size: 16px;
+      }
+      .button, .recommend-button, .video-button {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="bubbles">
-    <!-- Create multiple bubbles -->
-    <div class="bubble" style="left: 10%; width: 20px; height: 20px; animation-duration: 15s;"></div>
-    <div class="bubble" style="left: 20%; width: 25px; height: 25px; animation-duration: 18s;"></div>
-    <div class="bubble" style="left: 30%; width: 15px; height: 15px; animation-duration: 12s;"></div>
-    <div class="bubble" style="left: 40%; width: 30px; height: 30px; animation-duration: 20s;"></div>
-    <div class="bubble" style="left: 50%; width: 22px; height: 22px; animation-duration: 17s;"></div>
-    <div class="bubble" style="left: 60%; width: 18px; height: 18px; animation-duration: 14s;"></div>
-    <div class="bubble" style="left: 70%; width: 28px; height: 28px; animation-duration: 19s;"></div>
-    <div class="bubble" style="left: 80%; width: 24px; height: 24px; animation-duration: 16s;"></div>
-    <div class="bubble" style="left: 90%; width: 26px; height: 26px; animation-duration: 22s;"></div>
-  </div>
-
+  <div class="overlay"></div>
+  
   <div class="container">
-    <h2>Generate Your Access Key</h2>
-    <p>Click the button below to generate your key.<br><br>Validity: 24 hours ⏳</p>
-    <button id="server02" class="button">Website Server - 1</button>
-    <button id="server03Url" class="button">Website Server - 2</button><br> 
-    <button id="recommendServer" class="button">Website Server - 3</button><br>
-    <button id="watchVideo" class="button">TUTORIAL VIDEO [EASY METHOD]</button>
-    <p>Please do <strong>Watch TUTORIAL Video FIRST</strong>, so that you not face any Problem.</p>
+    <h2>Power Study Access</h2>
+    <p>Click a button below to generate your access key.</p>
+    <p>Your access key will remain valid for 6 hours. After that, you'll need to generate a new one.</p>
+
+    <button id="server02" class="button">Server 1 🚀</button>
+    <button id="server03Url" class="button">Server 2 ➡️</button>
+    <button id="recommendServer" class="recommend-button">Recommended 🔥</button>
+    <button id="watchVideo" class="video-button">How To Generate Key</button>
+
     <p class="loading" id="loadingMessage">Generating URL, please wait...</p>
   </div>
 
+  <!-- Snowflakes -->
   <script>
-    const urls = {
-      server02: 'http://linkcents.com/Iru0',
-      server03: 'http://linkcents.com/Iru0',
-      recommendServer: 'https://linkcents.com/S5rwewD',
-      tutorialVideo: 'https://t.me/EduVerse_Network/589'
-    };
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.style.left = Math.random() * window.innerWidth + 'px';
+      snowflake.style.animationDuration = (5 + Math.random() * 5) + 's';
+      snowflake.style.opacity = Math.random();
+      snowflake.innerHTML = '❄️';
+      document.body.appendChild(snowflake);
+
+      setTimeout(() => {
+        snowflake.remove();
+      }, 10000);
+    }
+    setInterval(createSnowflake, 200);
+  </script>
+
+  <script>
+    const server02Url = 'https://shortner.in/zELss';
+    const server03Url = 'https://shortner.in/zELss';
+    const recommendServerUrl = 'https://shortner.in/zELss';
+    const tutorialVideoUrl = 'https://t.me/Files_Buddy_Bot?start=BQADAQADRAcAAm8cSEfQnySBc2bwAAEWBA';
 
     function setTemporaryCookieAndRedirect(cookieName, url) {
-      if (!url) return alert('Invalid URL!');
-      document.getElementById("loadingMessage").style.display = "block";
-      setTimeout(() => {
-        document.cookie = `${cookieName}=true; path=/; max-age=${6 * 60 * 60}`;
-        window.location.href = url;
-      }, 2000);
+      const now = new Date();
+      const tempExpirationTime = now.getTime() + 6 * 60 * 1000;
+      document.cookie = `${cookieName}=true; expires=${new Date(tempExpirationTime).toUTCString()}; path=/`;
+      window.location.href = url;
     }
 
-    document.getElementById('server02').addEventListener('click', () => setTemporaryCookieAndRedirect('server02KeyGenerated', urls.server02));
-    document.getElementById('server03Url').addEventListener('click', () => setTemporaryCookieAndRedirect('server03KeyGenerated', urls.server03));
-    document.getElementById('recommendServer').addEventListener('click', () => setTemporaryCookieAndRedirect('recommendServerKeyGenerated', urls.recommendServer));
-    document.getElementById('watchVideo').addEventListener('click', () => window.open(urls.tutorialVideo, '_blank'));
+    document.getElementById('server02').addEventListener('click', function() {
+      setTemporaryCookieAndRedirect('server02KeyGenerated', server02Url);
+    });
+
+    document.getElementById('server03Url').addEventListener('click', function() {
+      setTemporaryCookieAndRedirect('server03KeyGenerated', server03Url);
+    });
+
+    document.getElementById('recommendServer').addEventListener('click', function() {
+      setTemporaryCookieAndRedirect('recommendServerKeyGenerated', recommendServerUrl);
+    });
+
+    document.getElementById('watchVideo').addEventListener('click', function() {
+      window.open(tutorialVideoUrl, '_blank');
+    });
   </script>
 
 </body>
